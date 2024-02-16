@@ -3,11 +3,7 @@
     Login
 @endpush
 @section('content')
-<div class="container">
-    <div class="row d-flex justify-content-center align-items-center vh-100">
-        <div class="col-md-5">
-            <div class="card">
-                <div class="card-body">
+
                     @if ($errors->has('login'))
                     <code>{{ $errors->first('login') }}</code>
                    @endif
@@ -38,9 +34,4 @@
                     <dov class="form-group">
                         <a href="" class="text-primary">Forget Password</a>
                     </dov>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

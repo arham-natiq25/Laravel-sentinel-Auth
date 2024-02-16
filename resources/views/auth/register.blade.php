@@ -3,11 +3,7 @@
     Register
 @endpush
 @section('content')
-<div class="container">
-    <div class="row d-flex justify-content-center align-items-center vh-100">
-        <div class="col-md-5">
-            <div class="card">
-                <div class="card-body">
+
                     <form action="{{route('auth.user.register')}}" method="POST">
                         @csrf
                     <div class="form-group">
@@ -54,9 +50,4 @@
                     <div class="form-group">
                         <a href="" class="text-primary">Forget Password</a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
