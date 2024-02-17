@@ -14,6 +14,23 @@ class PasswordUpdateController extends Controller
         $request->validate([
             'password'=>'required|min:8|max:20|confirmed'
         ]);
+        $userId = Reminder::where('code', $token)->first()->user_id;
+
+        $user = Sentinel::findUserById($userId);
+
+
+        if ($user) {
+            Reminder::complete($user, $token, $request->password);
+            return redirect()->route('auth.login')->with('status', 'Your password is updated successfully');
+        }else
+        {
+            dd('error');
+        }
+
+
+
+
+
 
     }
 }
