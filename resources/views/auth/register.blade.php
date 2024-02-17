@@ -48,6 +48,6 @@
                 </form>
 
                     <div class="form-group">
-                        <a href="" class="text-primary">Forget Password</a>
+                        <a href="{{route('auth.reset-password')}}" class="text-primary">Forget Password</a>
                     </div>
 @endsection

@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\Auth\EmailActivationController;
+use App\Http\Controllers\Auth\ForgetPasswordPageController;
 use App\Http\Controllers\Auth\LoginPageController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\PasswordUpdateController;
 use App\Http\Controllers\Auth\RegisterPageController;
+use App\Http\Controllers\Auth\ResetPasswordPageController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\AuthEmailVerifyPageController;
+use App\Http\Controllers\AuthResetPasswordController;
 use App\Http\Controllers\UserDashboardController;
 use App\Mail\UserActivationMail;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
@@ -35,6 +39,10 @@ Route::group(['as'=>'auth.','middleware'=>'guest'],function(){
     Route::post('/user-register',UserRegisterController::class)->name('user.register');
     Route::get('/email/active/{token}',EmailActivationController::class)->name('email.active');
     Route::get('/email/verify',AuthEmailVerifyPageController::class)->name('email.verify');
+    Route::get('/reset-password',ResetPasswordPageController::class)->name('reset-password');
+    Route::post('/reset-password',AuthResetPasswordController::class)->name('reset-user-password');
+    Route::get('/forget-password/{token}',ForgetPasswordPageController::class)->name('forget-password');
+    Route::post('/update-password/{token}',PasswordUpdateController::class)->name('password.update');
 });
 
 Route::get('/active', function () {
