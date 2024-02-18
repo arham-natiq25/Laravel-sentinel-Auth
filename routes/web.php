@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginPageController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordUpdateController;
 use App\Http\Controllers\Auth\RegisterPageController;
+use App\Http\Controllers\Auth\ResendUserRegisterMailController;
 use App\Http\Controllers\Auth\ResetPasswordPageController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
@@ -43,6 +44,7 @@ Route::group(['as'=>'auth.','middleware'=>'guest'],function(){
     Route::post('/reset-password',AuthResetPasswordController::class)->name('reset-user-password');
     Route::get('/forget-password/{token}',ForgetPasswordPageController::class)->name('forget-password');
     Route::post('/update-password/{token}',PasswordUpdateController::class)->name('password.update');
+    Route::get('/resend/email',ResendUserRegisterMailController::class)->name('resend-email');
 });
 
 Route::get('/active', function () {
