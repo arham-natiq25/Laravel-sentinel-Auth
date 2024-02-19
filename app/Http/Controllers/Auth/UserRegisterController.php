@@ -29,7 +29,8 @@ class UserRegisterController extends Controller
 
         $activation = Activation::create($user);
 
-
+        $adminRole = Sentinel::findRoleBySlug('user');
+        $adminRole->users()->attach($user);
         FacadesSession::put('registered_user', [
             'id'         => $user->id,
             'first_name' => $user->first_name,

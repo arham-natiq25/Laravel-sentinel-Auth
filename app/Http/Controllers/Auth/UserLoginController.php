@@ -17,8 +17,6 @@ class UserLoginController extends Controller
         'password' => $request->password,
     ];
 
-
-
     $user = Sentinel::findByCredentials($credentials);
 
         if ($user) {
@@ -27,7 +25,11 @@ class UserLoginController extends Controller
                 // Authenticate the user
                 if (Sentinel::authenticate($credentials)) {
                     // Authentication successful
-                    return redirect()->intended('/dashboard'); // Redirect to the intended URL or any default page
+                    if ($user->inRole('admin')) {
+                        return redirect()->intended('/admin/dashboard'); // Redirect to the admin dashboard
+                    } else {
+                        return redirect()->intended('/dashboard'); // Redirect to the user dashboard
+                    }
                 } else {
                     // Authentication failed
                     return redirect()->back()->withInput()->withErrors(['login' => 'Invalid email or password']);
