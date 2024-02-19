@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordUpdateController;
 use App\Http\Controllers\Auth\RegisterPageController;
 use App\Http\Controllers\Auth\ResendUserRegisterMailController;
 use App\Http\Controllers\Auth\ResetPasswordPageController;
+use App\Http\Controllers\Auth\RoleUpdateController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\AuthEmailVerifyPageController;
@@ -67,6 +68,7 @@ Route::group(['as' => 'auth.', 'middleware' => 'guest'], function () {
 
 Route::group(['as'=>'admin.','middleware'=>'admin'],function(){
     Route::get('/admin/dashboard',DashboardController::class)->name('dashboard');
+    Route::get('role/update/{id}/{slug}',RoleUpdateController::class)->name('role.update');
 });
 
 Route::get('/active', function () {
