@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserLoginController extends Controller
 {
@@ -17,7 +19,8 @@ class UserLoginController extends Controller
         'password' => $request->password,
     ];
 
-    $user = Sentinel::findByCredentials($credentials);
+    try {
+        $user = Sentinel::findByCredentials($credentials);
 
         if ($user) {
             // Check activation status
@@ -42,6 +45,10 @@ class UserLoginController extends Controller
             // User not found
             return redirect()->back()->withInput()->withErrors(['login' => 'Invalid email or password']);
         }
+
+    } catch (ThrottlingException $e) {
+        return redirect()->back()->withInput()->withErrors(['login' => 'Too many failed attempts. Please try again in a few minutes.']);
+    }
 
    }
 }

@@ -216,12 +216,13 @@ return [
             'interval' => 900,
 
             'thresholds' => [
-                10 => 1,
-                20 => 2,
-                30 => 4,
-                40 => 8,
-                50 => 16,
-                60 => 32,
+                3 => 1, // Allow 1 attempt after 3 failures within 5 minutes
+                // 10 => 1,
+                // 20 => 2,
+                // 30 => 4,
+                // 40 => 8,
+                // 50 => 16,
+                // 60 => 32,
             ],
         ],
 
@@ -234,7 +235,9 @@ return [
         'user' => [
             'interval' => 900,
 
-            'thresholds' => 5,
+            'thresholds' => [
+                3 => 1, // Allow 1 attempt after 3 failures within 5 minutes
+            ],
         ],
     ],
 ];
